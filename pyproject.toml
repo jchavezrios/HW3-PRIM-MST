@@ -17,10 +17,10 @@ dependencies = ["pytest",
                 "matplotlib", 
                 "scikit-learn", 
                 "sphinx"]
-python-version = ">= 3.7"
+requires-python = ">= 3.8"
 
 [tool.coverage.run]
 source = ["mst"] # parent directory of package
 
 [project.urls]
-Home = "https://github.com/jchavezrios/HW3-PRIM-MST"
+Home = "https://github.com/jchavezrios/HW3-PRIM-MST.git"
