@@ -1,4 +1,5 @@
-![BuildStatus](https://github.com/jchavezrios/HW3-PRIM-MST/actions/workflows/main.yml/badge.svg?event=push)
+![BuildStatus](https://github.com/jchavezrios/HW3-PRIM-MST/actions/workflows/main.yml/badge.svg)
+
 
 
 # HW 3: Prim's algorithm

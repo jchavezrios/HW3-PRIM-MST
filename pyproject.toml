@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 
 
 [project]
-name = "HW3_mst" # example
+name = "HW3_mst" 
 authors = [{name = "Jocelyn Chavez Rios", email = "jocelyn.chavezrios@ucsf.edu"}]
 license = {file = "LICENSE"}
 
