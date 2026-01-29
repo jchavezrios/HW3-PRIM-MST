@@ -1,7 +1,6 @@
-#import numpy as np 
+import numpy as np 
 import heapq
 from typing import Union
-import numpy as np
 class Graph:
 
     def __init__(self, adjacency_mat: Union[np.ndarray, str]):
@@ -10,7 +9,7 @@ class Graph:
         Unlike the BFS assignment, this Graph class takes an adjacency matrix as input. `adjacency_mat` 
         can either be a 2D numpy array of floats or a path to a CSV file containing a 2D numpy array of floats.
 
-        In this project, we will assume `adjacency_mat` corresponds to the adjacency matrix of an undirected graph.
+     In this project, we will assume `adjacency_mat` corresponds to the adjacency matrix of an undirected graph.
     
         """
         if type(adjacency_mat) == str:
