@@ -1,7 +1,7 @@
-import numpy as np
+#import numpy as np 
 import heapq
 from typing import Union
-
+import numpy as np
 class Graph:
 
     def __init__(self, adjacency_mat: Union[np.ndarray, str]):
@@ -41,4 +41,45 @@ class Graph:
         `heapify`, `heappop`, and `heappush` functions.
 
         """
-        self.mst = None
+        
+        m = self.adj_mat.shape[0]
+        self.mst = None # starter number of vertices, like (0,0)
+        
+        # track what vertices are in mst 
+        visited = [False]*m 
+        
+        # create a priority queue that will store data 
+        priorQ = []        
+        
+        # begin with vertex 0 
+        visited[0] = True 
+        
+        # while loop to go through map / tree 
+        for _ in range(m):
+            if self.adj_mat[0][_] > 0: # edge exists since weight is greater than 0 
+                heapq.heappush(priorQ, (self.adj_mat[0][_], 0 , _ ))
+        # goes through until edges added = n - 1 based on mst properties for n # of nodes      
+        edge = 0 
+        
+        while priorQ and edge < m - 1:
+            # obtain min weight edge 
+            wt , u , v = heapq.heappop( priorQ ) 
+            
+            # skip if vertex is already in mst to avoid cyclization 
+            if visited[v]:
+                continue
+            
+            # if not then add v to mst list 
+            visited[v] = True
+            edge += 1
+            
+            # add edge to mst for adj_mat;  consider both directions for undirected graph 
+            self.mst[u][v] = wt
+            self.mst[v][u] = wt
+            
+            # add edge(s) from new vertex v to priorQ 
+            for x in range(m):
+                if self.adj_mat[v][x] > 0 and not visited[x]:
+                    heapq.heappush(priorQ, (self.adj_mat[v][x]), v , x )
+        
+#print('yur')

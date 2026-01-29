@@ -1,0 +1,26 @@
+[build-system]
+requires = [
+	"flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+
+[project]
+name = "HW3_mst" # example
+authors = [{name = "Jocelyn Chavez Rios", email = "jocelyn.chavezrios@ucsf.edu"}]
+license = {file = "LICENSE"}
+
+classifiers = ["License :: OSI Approved :: MIT License"]
+dynamic = ["version", "description"]
+dependencies = ["pytest", 
+                "numpy", 
+                "scipy", 
+                "matplotlib", 
+                "scikit-learn", 
+                "sphinx"]
+python-version = ">= 3.9"
+
+[tool.coverage.run]
+source = ["src"] # parent directory of package
+
+[project.urls]
+Home = "https://github.com/jchavezrios/HW3-PRIM-MST"
