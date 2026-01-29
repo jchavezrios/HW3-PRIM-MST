@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 
 
 [project]
-name = "HW3-PRIM-MST" 
+name = "mst" 
 authors = [{name = "Jocelyn Chavez Rios", email = "jocelyn.chavezrios@ucsf.edu"}]
 license = {file = "LICENSE"}
 
