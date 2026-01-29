@@ -20,12 +20,9 @@ def check_mst(adj_mat: np.ndarray,
         expected_weight: weight of the minimum spanning tree of the full graph
         allowed_error: allowed difference between proposed MST weight and `expected_weight`
 
-    TODO: Add additional assertions to ensure the correctness of your MST implementation. For
-    example, how many edges should a minimum spanning tree have? Are minimum spanning trees
-    always connected? What else can you think of?
-
     """
-
+    n = mst.shape[0]
+    
     def approx_equal(a, b):
         return abs(a - b) < allowed_error
 
@@ -34,6 +31,18 @@ def check_mst(adj_mat: np.ndarray,
         for j in range(i+1):
             total += mst[i, j]
     assert approx_equal(total, expected_weight), 'Proposed MST has incorrect expected weight'
+    
+    
+    # added to check that all edges exist in original graph
+    
+    for i in range(n):
+        for j in range(n):
+            if mst[i, j] > 0:
+                assert adj_mat[i, j] > 0, f'MST contains edge ({i},{j}) not in original graph'
+                assert approx_equal(mst[i, j], adj_mat[i, j]), \
+                    f'MST edge weight ({i},{j}) does not match original graph'
+    
+    
 
 
 def test_mst_small():
@@ -64,11 +73,47 @@ def test_mst_single_cell_data():
     g.construct_mst()
     check_mst(g.adj_mat, g.mst, 57.263561605571695)
 
+    
 
 def test_mst_student():
     """
     
-    TODO: Write at least one unit test for MST construction.
+    Test that Graph raises TypeError for invalid input types
     
     """
     
+    # test with integer
+    with pytest.raises(TypeError, match='Input must be a valid path or an adjacency matrix'):
+        Graph(12345)
+    
+    # test with list
+    with pytest.raises(TypeError, match='Input must be a valid path or an adjacency matrix'):
+        Graph([1, 2, 3])
+    
+    # test with dict
+    with pytest.raises(TypeError, match='Input must be a valid path or an adjacency matrix'):
+        Graph({'a': 1})
+        
+def test_graph_ok():
+    """
+    unit test to see if tree has n-1 edges and symmetric 
+    
+    """
+    file_path = './data/small.csv'
+    g = Graph(file_path)
+    g.construct_mst()
+    
+    
+    mst = g.mst
+    
+    print(g.adj_mat)
+    
+    # number of vertices
+    owl = mst.shape[0]
+    
+    # does mst, owl, have n-1 edges 
+    num_edges = np.count_nonzero(mst) / 2  # Divide by 2 because undirected graph
+    assert num_edges == owl - 1, f'MST should have {owl-1} edges, but has {num_edges}'
+    
+    # determine if MST is symmetric (undirected graph property)
+    assert np.allclose(mst, mst.T), 'MST adjacency matrix must be symmetric'
